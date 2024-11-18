@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FruitsMania</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-sm bg-light navbar-light"
+      style="border-bottom: 1px solid black; font-size: xx-large"
+    >
+      <div class="container-fluid" style="justify-content: center">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">FRUITSMANIA</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-12" style="background-color: rgb(208, 232, 253)">
+          <h1 style="background-color: rgb(208, 232, 253); text-align: center">
+            {{shop.ShopName}}🛍️
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-8" style="background-color: rgb(255, 186, 186)">
+          <h1 style="text-align: center">MANAGE FRUITS 🍒</h1>
+          <div class="table-responsive">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th>Fruit</th>
+                  <th>Price</th>
+                  <th>     </th>
+                  
+
+                </tr>
+              </thead>
+              <tbody>
+                {%for fruit in fruitsdata%}
+                <tr>
+                  <td>{{fruit.fruit_name}}</td>
+                  <td>{{fruit.price }}</td>
+
+                  <td>
+                    
+                    <form method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="fruitid" value="{{ fruit.id }}">
+                        <button type="submit" name="delete">Delete</button>
+                    </form>
+                </td>
+
+                  {% endfor %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-4" style="background-color: rgb(234, 255, 186);">
+            <h1 style="text-align: center">ADD FRUITS 🍒</h1>
+            <form method="post">
+                {% csrf_token %}
+            <label for="fruitname">Fruit:</label>
+            <input type="text" id="fruitname" name="fruitname"><br><br>
+            <label for="Price">Price:</label>
+            <input type="text" id="price" name="price"><br><br>
+
+            <button type="submit" name="add">Add Fruit</button>
+            </form>
+
+
+        
+        </div>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
